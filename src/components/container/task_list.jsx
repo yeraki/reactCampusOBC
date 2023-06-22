@@ -1,18 +1,28 @@
 
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Task } from '../../models/task.class';
 import { LEVELS } from '../../models/levels.enum';
 import TaskComponent from '../pure/task';
 
 
+
 const TaskListComponent = () => {
-    
 
     const defaultTask = new Task('Send email', 'default description', false, LEVELS.NORMAL);
+    //Estado del componente
+    const [tasks, setTasks] = useState(defaultTask);
 
-    const changeState = (id) => {
+    //Control de LifeCycle component
+    useEffect(() => {
+        console.log("Task state has been modified")
+        return () => {
+            console.log("Tasklist component is going to unmount")
+        };
+    }, [tasks]);
+    
+    const changeCompleted = (id) => {
         console.log('Cambiar estado de tarea');
     }
 
